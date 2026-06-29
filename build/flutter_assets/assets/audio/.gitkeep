@@ -1,7 +1,0 @@
-# This directory contains audio files for the game
-# Add MP3 files:
-# - background_music.mp3 (looping background music)
-# - correct.mp3 (happy sound for correct answers)
-# - wrong.mp3 (gentle sound for wrong answers)
-# - click.mp3 (button click sound)
-# - celebration.mp3 (victory sound for completing quiz)

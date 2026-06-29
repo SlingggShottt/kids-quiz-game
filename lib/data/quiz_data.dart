@@ -338,4 +338,19 @@ final List<Category> categories = [
       ),
     ],
   ),
+  Category(
+    name: 'Spot the Difference',
+    icon: '🔍',
+    gameRoute: '/spot-the-difference',
+  ),
+  Category(
+    name: 'Alphabet',
+    icon: '🔤',
+    gameRoute: '/alphabet',
+  ),
+  Category(
+    name: 'Numbers',
+    icon: '🔢',
+    gameRoute: '/numbers',
+  ),
 ];

@@ -7,6 +7,9 @@ import 'screens/settings_screen.dart';
 import 'screens/categories_screen.dart';
 import 'screens/quiz_screen.dart';
 import 'screens/results_screen.dart';
+import 'screens/spot_the_difference_screen.dart';
+import 'screens/alphabet_screen.dart';
+import 'screens/numbers_screen.dart';
 import 'services/audio_service.dart';
 
 void main() async {
@@ -35,6 +38,10 @@ class MyApp extends StatelessWidget {
         '/categories': (context) => const CategoriesScreen(),
         '/quiz': (context) => const QuizScreen(),
         '/results': (context) => const ResultsScreen(),
+        '/spot-the-difference': (context) =>
+            const SpotTheDifferenceScreen(),
+        '/alphabet': (context) => const AlphabetScreen(),
+        '/numbers': (context) => const NumbersScreen(),
       },
     );
   }

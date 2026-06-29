@@ -1,6 +1,6 @@
 # 🎮 Kids Quiz Game — Flutter E-Learning App
 
-A fun, interactive quiz game for children aged **3–5 years**, built with Flutter. Kids are shown a question and must pick the correct answer from 4 options. The app covers 6 learning categories with 10 questions each, complete with animations, sound effects, confetti, and a star-based scoring system.
+A fun, interactive learning app for children aged **3–8 years**, built with Flutter. The app has two modes: a **quiz module** where kids identify images across 6 categories, and a **mini-games module** with 3 interactive games (Spot the Difference, Alphabet, Numbers). All screens fit without scrolling on any device size — phone, tablet, or browser.
 
 ---
 
@@ -17,14 +17,15 @@ A fun, interactive quiz game for children aged **3–5 years**, built with Flutt
    - [Services](#services)
    - [Data](#data)
 5. [Quiz Categories & Questions](#quiz-categories--questions)
-6. [Assets Guide](#assets-guide)
-7. [Dependencies](#dependencies)
-8. [Clone the Repository](#clone-the-repository)
-9. [Installation & Setup](#installation--setup)
-10. [Running on Different Devices](#running-on-different-devices)
-11. [Building a Release APK](#building-a-release-apk)
-12. [Installing & Running the APK on a Phone](#installing--running-the-apk-on-a-phone)
-13. [Customisation Guide](#customisation-guide)
+6. [Mini-Games](#mini-games)
+7. [Assets Guide](#assets-guide)
+8. [Dependencies](#dependencies)
+9. [Clone the Repository](#clone-the-repository)
+10. [Installation & Setup](#installation--setup)
+11. [Running on Different Devices](#running-on-different-devices)
+12. [Building a Release APK](#building-a-release-apk)
+13. [Installing & Running the APK on a Phone](#installing--running-the-apk-on-a-phone)
+14. [Customisation Guide](#customisation-guide)
 
 ---
 
@@ -33,16 +34,19 @@ A fun, interactive quiz game for children aged **3–5 years**, built with Flutt
 | Feature | Details |
 |---|---|
 | 🎨 Kid-Friendly UI | Bright gradients, large rounded buttons, emoji icons |
-| 📚 6 Categories | Fruits, Vegetables, Vehicles, Animals, Colors, Shapes |
+| 📚 6 Quiz Categories | Fruits, Vegetables, Vehicles, Animals, Colors, Shapes |
 | ❓ 60 Questions | 10 questions per category, randomly shuffled |
 | 🎮 Quiz Gameplay | 4-option multiple choice, 5 questions per session |
+| 🔍 Spot the Difference | Tap the odd emoji out in a 4×4 grid — 10 rounds |
+| 🔤 Alphabet Game | Match emojis to their starting letter — 10 rounds |
+| 🔢 Numbers Game | Count the emojis and pick the right number — 10 rounds |
 | 🎵 Sound System | Background music, correct/wrong/click/celebration sounds |
 | ⭐ Star Scoring | 0–3 stars based on percentage correct |
 | 🎊 Confetti | Confetti burst animation on every correct answer |
 | ⚙️ Settings | Toggle sound effects, background music, and master volume |
 | 💾 Persistent Settings | Audio preferences saved with SharedPreferences |
 | 📱 Cross-Platform | iOS, Android, and Web |
-| 🔄 Animated Transitions | Splash screen, category cards, answer buttons all animated |
+| 📐 No-Scroll Layouts | LayoutBuilder ensures everything fits on screen without scrolling |
 
 ---
 
@@ -59,14 +63,25 @@ Home Screen            ← "Play!" and "Settings" buttons, bouncing emoji icon
     ├──► Settings Screen   ← Sound effects toggle, music toggle, volume slider, reset
     │
     ▼
-Categories Screen      ← 2×3 grid of category cards (Fruits, Vegetables, etc.)
+Categories Screen      ← 4 rows: 3 quiz rows (2 cards each) + 1 mini-games row (3 cards)
     │
-    ▼
-Quiz Screen            ← 5 random questions from the selected category
-    │                     Image area + question text + 2×2 answer grid
-    │                     Correct = green + confetti; Wrong = red highlight
-    ▼
-Results Screen         ← Score display, 0–3 stars, Play Again / Choose Category / Home
+    ├──► Quiz Screen        ← 5 random questions from the selected quiz category
+    │       │                  Image area + question text + 2×2 answer grid
+    │       │                  Correct = green + confetti; Wrong = red highlight
+    │       ▼
+    │    Results Screen     ← Score display, 0–3 stars, Play Again / Choose Category / Home
+    │
+    ├──► Spot the Difference ← Tap the one emoji that's different in a 4×4 grid
+    │       ▼
+    │    Results Screen
+    │
+    ├──► Alphabet Game      ← See an emoji + word, pick the starting letter
+    │       ▼
+    │    Results Screen
+    │
+    └──► Numbers Game       ← Count the emojis, tap the right number
+            ▼
+         Results Screen
 ```
 
 ---
@@ -76,39 +91,42 @@ Results Screen         ← Score display, 0–3 stars, Play Again / Choose Categ
 ```
 kids_quiz_game/
 ├── lib/
-│   ├── main.dart                  # App entry point, routes, theme
+│   ├── main.dart                          # App entry point, routes, theme
 │   ├── models/
-│   │   ├── question.dart          # Question data model
-│   │   └── category.dart          # Category data model
+│   │   ├── question.dart                  # Question data model
+│   │   └── category.dart                  # Category data model (with gameRoute)
 │   ├── screens/
-│   │   ├── splash_screen.dart     # Animated intro screen
-│   │   ├── home_screen.dart       # Main menu (Play + Settings)
-│   │   ├── settings_screen.dart   # Audio settings
-│   │   ├── categories_screen.dart # Category picker grid
-│   │   ├── quiz_screen.dart       # Core quiz gameplay
-│   │   └── results_screen.dart    # Score & stars display
+│   │   ├── splash_screen.dart             # Animated intro screen
+│   │   ├── home_screen.dart               # Main menu (Play + Settings)
+│   │   ├── settings_screen.dart           # Audio settings
+│   │   ├── categories_screen.dart         # 9-category picker (quiz + games)
+│   │   ├── quiz_screen.dart               # Core quiz gameplay
+│   │   ├── results_screen.dart            # Score & stars display
+│   │   ├── spot_the_difference_screen.dart # Odd-one-out emoji game
+│   │   ├── alphabet_screen.dart           # Letter-recognition game
+│   │   └── numbers_screen.dart            # Counting game
 │   ├── widgets/
-│   │   ├── answer_button.dart     # Animated multiple-choice button
-│   │   ├── category_card.dart     # Tappable category card with press animation
-│   │   └── quiz_image.dart        # Animated image/placeholder widget
+│   │   ├── answer_button.dart             # Animated multiple-choice button
+│   │   ├── category_card.dart             # Tappable category card with press animation
+│   │   └── quiz_image.dart               # Animated image/placeholder widget
 │   ├── services/
-│   │   └── audio_service.dart     # Singleton audio manager
+│   │   └── audio_service.dart             # Singleton audio manager
 │   └── data/
-│       └── quiz_data.dart         # All 60 questions across 6 categories
+│       └── quiz_data.dart                 # 6 quiz categories + 3 game entries
 ├── assets/
 │   ├── images/
-│   │   ├── fruits/                # apple.png, banana.png, ... (10 images)
-│   │   ├── vegetables/            # carrot.png, tomato.png, ... (10 images)
-│   │   ├── vehicles/              # car.png, bus.png, ... (10 images)
-│   │   ├── animals/               # lion.png, dog.png, ... (10 images)
-│   │   ├── colors/                # red.png, blue.png, ... (10 images)
-│   │   └── shapes/                # circle.png, square.png, ... (10 images)
+│   │   ├── fruits/                        # apple.png, banana.png, ... (10 images)
+│   │   ├── vegetables/                    # carrot.png, tomato.png, ... (10 images)
+│   │   ├── vehicles/                      # car.png, bus.png, ... (10 images)
+│   │   ├── animals/                       # lion.png, dog.png, ... (10 images)
+│   │   ├── colors/                        # red.png, blue.png, ... (10 images)
+│   │   └── shapes/                        # circle.png, square.png, ... (10 images)
 │   └── audio/
-│       ├── background_music.mp3   # Looping background track
-│       ├── correct.mp3            # Played on correct answer
-│       ├── wrong.mp3              # Played on wrong answer
-│       ├── click.mp3              # Played on any button tap
-│       └── celebration.mp3        # Played on results screen
+│       ├── background_music.mp3           # Looping background track
+│       ├── correct.mp3                    # Played on correct answer
+│       ├── wrong.mp3                      # Played on wrong answer
+│       ├── click.mp3                      # Played on any button tap
+│       └── celebration.mp3               # Played on results screen
 └── pubspec.yaml
 ```
 
@@ -132,9 +150,11 @@ The app entry point. Key responsibilities:
 | `/categories` | `CategoriesScreen` |
 | `/quiz` | `QuizScreen` |
 | `/results` | `ResultsScreen` |
+| `/spot-the-difference` | `SpotTheDifferenceScreen` |
+| `/alphabet` | `AlphabetScreen` |
+| `/numbers` | `NumbersScreen` |
 
 - Uses Material 3 theming with a blue seed colour.
-- Also contains `QuizScreenWrapper` (a stateful wrapper that shuffles and limits questions to 5) — currently unused in routing but available for direct widget embedding.
 
 ---
 
@@ -156,9 +176,12 @@ class Question {
 class Category {
   final String name;              // Display name e.g. "Fruits"
   final String icon;              // Emoji icon e.g. "🍎"
-  final List<Question> questions; // All questions for this category
+  final List<Question> questions; // Quiz questions (empty for game categories)
+  final String? gameRoute;        // Non-null → routes to a game screen instead of quiz
 }
 ```
+
+`gameRoute` is the key addition: when non-null the categories screen navigates to a dedicated game screen instead of the standard quiz flow. Game categories don't need any `questions`.
 
 ---
 
@@ -192,17 +215,19 @@ class Category {
 
 #### `categories_screen.dart`
 
-- Displays a **2×3 grid** of category cards using a `LayoutBuilder` to calculate card sizes that fill the screen without scrolling.
-- Each card tap:
-  1. Plays click sound.
-  2. Shuffles the category's questions.
-  3. Takes the first 5 shuffled questions.
-  4. Navigates to `/quiz` passing `{category: Category, questions: List<Question>}` as route arguments.
-- Gradient: orange → yellow.
+Redesigned to display all **9 categories** on one screen with no scrolling:
+
+- Uses `LayoutBuilder` inside an `Expanded` to compute card heights at runtime:
+  `cardH = ((maxHeight - fixedOverhead) / 4).clamp(48, 160)`
+- **Two labelled sections:**
+  - `📚 Quiz Categories` — 3 rows of 2 cards (the 6 image-quiz categories)
+  - `🎮 Mini Games` — 1 row of 3 cards (Spot the Difference, Alphabet, Numbers)
+- Game cards show a small **"GAME" badge** (top-right corner) via `Stack + Positioned`.
+- **Navigation logic:** if `category.gameRoute != null` → `Navigator.pushNamed(context, category.gameRoute!)`, otherwise shuffle questions and push `/quiz`.
 
 #### `quiz_screen.dart`
 
-This is the core gameplay screen. Detailed breakdown:
+The core quiz gameplay screen.
 
 **State variables:**
 - `_category` — the `Category` passed via route arguments.
@@ -222,17 +247,6 @@ This is the core gameplay screen. Detailed breakdown:
 6. If more questions remain: resets state, increments `_currentIndex`.
 7. If all 5 questions done: navigates to `/results` with `{score, total, category name}`.
 
-**Layout** uses `LayoutBuilder` to make the UI adaptive:
-- Image area height = 25% of available screen height.
-- Button height clamped between 50–70 dp.
-- Answer buttons displayed in a **2×2 `GridView`** with `childAspectRatio: 2.5`.
-
-**Colour logic for buttons:**
-- Default: one of 4 vivid colours (red, green, purple, yellow) per position.
-- After answer: correct option turns green (✓ icon), wrong selected option turns red (✗ icon).
-
-**Confetti:** positioned at `Alignment.topCenter` using `ConfettiWidget` with explosive blast.
-
 #### `results_screen.dart`
 
 - Reads `score`, `total`, `category` from route arguments.
@@ -241,18 +255,36 @@ This is the core gameplay screen. Detailed breakdown:
   - 30–70%: score panel fades in.
   - 50–100%: star row scales/fades in.
 - **Star rating:** `(percentage * 3).round()` gives 0, 1, 2, or 3 filled stars.
-- **Message & emoji** based on score percentage:
+- Three navigation buttons: **Play Again**, **Choose Category**, **Home**.
 
-| Score % | Message | Emoji |
-|---|---|---|
-| 100% | Perfect! 🏆 | 🏆 |
-| ≥ 80% | Amazing! ⭐ | 🌟 |
-| ≥ 60% | Great Job! 👍 | 😊 |
-| ≥ 40% | Good Try! 💪 | 🙂 |
-| < 40% | Keep Practicing! 📚 | 💪 |
+#### `spot_the_difference_screen.dart`
 
-- **Gradient colour** of the background also changes with score (green = high, purple = mid, red/yellow = low).
-- Three navigation buttons: **Play Again** (pop back to quiz), **Choose Category** (pop twice), **Home** (pop three times).
+An "odd one out" game. A **4×4 grid of 16 emoji tiles** is shown — 15 are identical, 1 is different. The child taps the odd tile. 10 rounds per session.
+
+- Emoji pairs are chosen from visually unrelated categories (e.g. 🐶 vs 🍕, ⭐ vs 🍎) so the odd tile is obvious even at small sizes.
+- The grid uses `LayoutBuilder` to compute `childAspectRatio = cellWidth / cellHeight` so all 16 tiles always fit the available space on any screen size — phones and wide web browsers included.
+- `NeverScrollableScrollPhysics()` keeps the `GridView` bounded inside the `Expanded` area.
+- Correct tap → confetti + green highlight. Wrong tap → odd tile revealed green, tapped tile red. Auto-advances after 1.5 s.
+- Gradient: pink → purple.
+
+#### `alphabet_screen.dart`
+
+Teaches letter recognition. Shows an emoji + word; child picks which letter the word starts with from 4 large letter buttons. 10 questions from a full A–Z dataset per session.
+
+- Dataset: 26 Dart 3 positional records `(String letter, String emoji, String word)`.
+- Layout uses `Expanded(flex: 3)` for the question card and `Expanded(flex: 2)` for the options, preventing overflow on all screen sizes.
+- Options are a 2×2 grid built from `Column + Row` (not `GridView`) so it works correctly inside `Expanded` without `shrinkWrap`.
+- `FittedBox(fit: BoxFit.scaleDown)` around the emoji prevents overflow on small screens.
+- Gradient: green → teal.
+
+#### `numbers_screen.dart`
+
+Teaches counting. Shows N copies of an emoji; child taps the correct count from 4 number buttons. Numbers 1–10 each appear exactly once per session (shuffled).
+
+- Emoji objects displayed via `Wrap(alignment: WrapAlignment.center)` inside an `Expanded` container — flows across multiple lines automatically.
+- Answer buttons live in a fixed-height `SizedBox(height: 64)` to prevent overflow regardless of screen size.
+- Four vivid button colours (red, green, blue, yellow) with `AnimatedContainer` colour transitions.
+- Gradient: blue → pink.
 
 ---
 
@@ -260,11 +292,10 @@ This is the core gameplay screen. Detailed breakdown:
 
 #### `widgets/answer_button.dart`
 
-A reusable animated multiple-choice button (currently defined but the quiz screen uses its own inline implementation for the grid). Key properties:
+A reusable animated multiple-choice button. Key properties:
 
 - `isSelected`, `isCorrect`, `showResult` — control the colour state.
 - Press animation: scales down to 0.95 on `onTapDown`, bounces back to 1.1 on release via `elasticOut`.
-- Colour logic identical to the quiz screen (green for correct, red for wrong-selected).
 - Shows ✓ or ✗ icon when `showResult` is true.
 
 #### `widgets/category_card.dart`
@@ -272,15 +303,12 @@ A reusable animated multiple-choice button (currently defined but the quiz scree
 - Accepts `name`, `icon`, `onTap`, and `color`.
 - Press animation: scales down to 0.95 using a 150 ms controller.
 - Gradient background from `color` to `color.withOpacity(0.7)`.
-- Plays `AudioService().playClickSound()` on tap.
 
 #### `widgets/quiz_image.dart`
 
-- Accepts `imagePath` (filename without extension) and `category` (folder name).
 - Constructs path: `assets/images/<category>/<imagePath>.png`.
 - Entry animation: scales from 0.5→1.0 with `elasticOut` + rotates from -0.1→0.0.
-- **Fallback placeholder**: if the image file is missing, shows the category icon and image name text on a colour-tinted background.
-- Category colours and icons are mapped per category name (fruits=orange/apple, animals=brown/pets, etc.).
+- **Fallback placeholder**: if the image is missing, shows the category icon and image name on a tinted background — the app will not crash.
 
 ---
 
@@ -301,10 +329,8 @@ A **singleton** audio manager (`factory` constructor returns the same `_instance
 | Method | Description |
 |---|---|
 | `init()` | Loads prefs, creates players, sets volume. Called once in `main()`. |
-| `playBackgroundMusic()` | Sets loop mode and plays `audio/background_music.mp3`. Gracefully silent if file missing. |
+| `playBackgroundMusic()` | Sets loop mode and plays `audio/background_music.mp3`. |
 | `stopBackgroundMusic()` | Stops the music player. |
-| `pauseBackgroundMusic()` | Pauses without resetting position. |
-| `resumeBackgroundMusic()` | Resumes from paused position. |
 | `playCorrectSound()` | Plays `audio/correct.mp3`. |
 | `playWrongSound()` | Plays `audio/wrong.mp3`. |
 | `playClickSound()` | Plays `audio/click.mp3`. |
@@ -313,7 +339,6 @@ A **singleton** audio manager (`factory` constructor returns the same `_instance
 | `setMusicEnabled(bool)` | Toggles music, stops/starts as needed, persists. |
 | `setVolume(double)` | Sets volume on both players (0.0–1.0), persists. |
 | `resetSettings()` | Resets all to defaults (sound=true, music=true, volume=0.5). |
-| `dispose()` | Disposes both players and resets state. |
 
 All audio failures are caught silently — the app continues working even if audio files are absent.
 
@@ -323,7 +348,16 @@ All audio failures are caught silently — the app continues working even if aud
 
 #### `data/quiz_data.dart`
 
-A top-level `List<Category> categories` with all 60 questions hard-coded. Each question has exactly 4 options and the correct answer always appears among them.
+A top-level `List<Category> categories` containing:
+- **6 quiz categories** — each with 10 `Question` objects referencing image assets.
+- **3 game entries** — `gameRoute` set, no questions needed.
+
+```dart
+// Game entries (appended after the 6 quiz categories)
+Category(name: 'Spot the Difference', icon: '🔍', gameRoute: '/spot-the-difference'),
+Category(name: 'Alphabet',            icon: '🔤', gameRoute: '/alphabet'),
+Category(name: 'Numbers',             icon: '🔢', gameRoute: '/numbers'),
+```
 
 ---
 
@@ -342,6 +376,26 @@ A top-level `List<Category> categories` with all 60 questions hard-coded. Each q
 
 ---
 
+## 🎮 Mini-Games
+
+### 🔍 Spot the Difference
+A 4×4 grid of 16 emoji tiles — 15 are identical, 1 is different. Tap the odd one out. 10 rounds per session. Emoji pairs come from completely different visual categories (animal vs food, vehicle vs symbol, etc.) so the odd tile is always obvious.
+
+### 🔤 Alphabet Game
+See an emoji and its English name (e.g. 🐘 Elephant). Tap the letter it starts with from 4 options. 10 questions per session, drawn randomly from a full 26-letter A–Z dataset.
+
+### 🔢 Numbers Game
+A collection of identical emojis is shown. Count them and tap the correct number from 4 options. Numbers 1–10 each appear exactly once per session, in a shuffled order.
+
+All mini-games:
+- Run for 10 rounds
+- Track score throughout
+- Play audio feedback (correct chime / wrong buzz)
+- Fire confetti on correct answers
+- Navigate to the shared Results Screen at the end
+
+---
+
 ## 🖼️ Assets Guide
 
 ### Images
@@ -355,16 +409,10 @@ The image filename must exactly match the `imageName` field in `quiz_data.dart` 
 assets/images/fruits/apple.png
 assets/images/fruits/banana.png
 assets/images/fruits/orange.png
-assets/images/fruits/grape.png
-assets/images/fruits/mango.png
-assets/images/fruits/strawberry.png
-assets/images/fruits/watermelon.png
-assets/images/fruits/pineapple.png
-assets/images/fruits/cherry.png
-assets/images/fruits/lemon.png
+...
 ```
 
-If an image is missing, `quiz_image.dart` automatically shows a coloured placeholder with the category icon and the image name as text — the app will not crash.
+If an image is missing, `quiz_image.dart` automatically shows a coloured placeholder — the app will not crash.
 
 ### Audio
 
@@ -373,8 +421,8 @@ Place MP3 files in `assets/audio/`. All audio is optional — missing files are 
 | Filename | When played |
 |---|---|
 | `background_music.mp3` | Loops from Home screen onwards |
-| `correct.mp3` | Every correct answer tap |
-| `wrong.mp3` | Every wrong answer tap |
+| `correct.mp3` | Every correct answer (quiz + mini-games) |
+| `wrong.mp3` | Every wrong answer (quiz + mini-games) |
 | `click.mp3` | Every button tap across the app |
 | `celebration.mp3` | Results screen on entry |
 
@@ -396,13 +444,7 @@ Listed in `pubspec.yaml`:
 ## 🔗 Clone the Repository
 
 ```bash
-# Clone via HTTPS
 git clone https://github.com/SlingggShottt/kids_quiz_game.git
-
-# Or via SSH
-git clone https://github.com/SlingggShottt/kids_quiz_game.git
-
-# Navigate into the project folder
 cd kids_quiz_game
 ```
 
@@ -412,340 +454,106 @@ cd kids_quiz_game
 
 ### Prerequisites
 
-Make sure you have the following installed:
-
-1. **Flutter SDK** (3.0.0 or higher)
-   - Download from: https://docs.flutter.dev/get-started/install
-   - Verify installation: `flutter --version`
-
-2. **Dart SDK** — bundled with Flutter, no separate install needed.
-
+1. **Flutter SDK** (3.0.0 or higher) — https://docs.flutter.dev/get-started/install
+2. **Dart SDK** — bundled with Flutter.
 3. **Android Studio** (for Android/emulator) or **Xcode** (for iOS — macOS only)
 
-4. **VS Code** (recommended) with the Flutter and Dart extensions installed.
-
-5. Run the Flutter doctor to confirm your environment is ready:
-   ```bash
-   flutter doctor
-   ```
-   Fix any issues flagged before proceeding.
+Verify your environment:
+```bash
+flutter doctor
+```
 
 ### Install Dependencies
 
 ```bash
-cd kids_quiz_game
 flutter pub get
 ```
 
-This downloads all packages listed in `pubspec.yaml` into the `.dart_tool/` cache.
-
 ### Add Your Assets
 
-1. Create the image folders if they don't already exist:
-   ```bash
-   mkdir -p assets/images/fruits assets/images/vegetables assets/images/vehicles
-   mkdir -p assets/images/animals assets/images/colors assets/images/shapes
-   mkdir -p assets/audio
-   ```
+```bash
+mkdir -p assets/images/fruits assets/images/vegetables assets/images/vehicles
+mkdir -p assets/images/animals assets/images/colors assets/images/shapes
+mkdir -p assets/audio
+```
 
-2. Drop your PNG images and MP3 audio files into the correct folders as described in the [Assets Guide](#-assets-guide).
-
-3. Confirm the asset declarations in `pubspec.yaml` exist:
-   ```yaml
-   flutter:
-     assets:
-       - assets/images/fruits/
-       - assets/images/vegetables/
-       - assets/images/vehicles/
-       - assets/images/animals/
-       - assets/images/colors/
-       - assets/images/shapes/
-       - assets/audio/
-   ```
+Drop your PNG images and MP3 files into the correct folders as described in the [Assets Guide](#-assets-guide).
 
 ---
 
 ## 📱 Running on Different Devices
 
-### Check Connected Devices
-
 ```bash
-flutter devices
+flutter devices          # list connected devices
+flutter run              # run on the default device
+flutter run -d chrome    # run on web
+flutter run -d emulator-5554  # target a specific device
 ```
-
-This lists all connected physical devices and running emulators/simulators.
-
----
-
-### ▶️ Run on Android Emulator
-
-1. Open Android Studio → **Device Manager** → Start an AVD (e.g. Pixel 6, API 33).
-2. Once the emulator is running:
-   ```bash
-   flutter run
-   ```
-   Flutter auto-detects the running emulator.
-
-To target a specific device if multiple are connected:
-```bash
-flutter run -d emulator-5554
-```
-
----
-
-### ▶️ Run on a Physical Android Device
-
-1. On your Android phone go to **Settings → About Phone** → tap **Build Number** 7 times to enable Developer Options.
-2. Go to **Settings → Developer Options** → enable **USB Debugging**.
-3. Connect your phone via USB. Accept the "Allow USB Debugging" prompt on the phone.
-4. Verify it appears:
-   ```bash
-   flutter devices
-   ```
-5. Run the app:
-   ```bash
-   flutter run
-   ```
-
----
-
-### ▶️ Run on iOS Simulator (macOS only)
-
-1. Open Xcode → **Xcode menu → Open Developer Tool → Simulator**.
-2. Choose a device (e.g. iPhone 15).
-3. Run:
-   ```bash
-   flutter run
-   ```
-
----
-
-### ▶️ Run on a Physical iPhone (macOS only)
-
-1. Connect your iPhone via USB.
-2. Open `ios/Runner.xcworkspace` in Xcode.
-3. Set your Apple developer account under **Signing & Capabilities**.
-4. Select your device in the Xcode device picker.
-5. Run from terminal:
-   ```bash
-   flutter run
-   ```
-
----
-
-### ▶️ Run on Web (Chrome)
-
-```bash
-flutter run -d chrome
-```
-
-> Note: Audio behaviour may differ in browsers due to autoplay policies. The app handles this gracefully by catching audio errors silently.
 
 ---
 
 ## 🏗️ Building a Release APK
 
-A release APK is a standalone installable file for Android that does not require a development machine or USB connection to use.
-
-### Step 1 — Create a Keystore (first time only)
-
-A keystore is a file that digitally signs your APK. You only need to create it once.
-
-```bash
-keytool -genkey -v -keystore ~/upload-keystore.jks \
-  -keyalg RSA -keysize 2048 -validity 10000 \
-  -alias upload
-```
-
-You will be prompted to enter a password and some identity information. Remember your password — you'll need it every time you build.
-
-### Step 2 — Configure Signing in the Project
-
-Create the file `android/key.properties`:
-
-```properties
-storePassword=<your-keystore-password>
-keyPassword=<your-key-password>
-keyAlias=upload
-storeFile=<absolute-path-to>/upload-keystore.jks
-```
-
-> **Important:** Add `android/key.properties` to your `.gitignore` — never commit this file to version control.
-
-Edit `android/app/build.gradle` to reference the keystore. Find the `android { ... }` block and add:
-
-```groovy
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
-android {
-    ...
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            storePassword keystoreProperties['storePassword']
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
-}
-```
-
-### Step 3 — Build the APK
-
-**Fat APK** (works on all Android architectures, larger file size):
 ```bash
 flutter build apk --release
-```
+# Output: build/app/outputs/flutter-apk/app-release.apk
 
-**Split APKs per ABI** (smaller files, one per CPU architecture):
-```bash
+# Smaller split APKs per CPU architecture:
 flutter build apk --release --split-per-abi
 ```
 
-The output APK(s) will be located at:
-```
-build/app/outputs/flutter-apk/app-release.apk
-# or for split:
-build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
-build/app/outputs/flutter-apk/app-x86_64-release.apk
-```
-
-> For most modern Android phones (2017 onwards), use `app-arm64-v8a-release.apk`.
-
-### Build Without Keystore (Debug-Signed, for personal use only)
-
-If you just want to share the APK quickly for personal testing and don't need a proper keystore:
-
-```bash
-flutter build apk --debug
-```
-
-Output: `build/app/outputs/flutter-apk/app-debug.apk`
+For most modern Android phones (2017 onwards) use `app-arm64-v8a-release.apk`.
 
 ---
 
 ## 📲 Installing & Running the APK on a Phone
 
-### Method 1 — Via USB (ADB)
-
-With the phone connected and USB Debugging enabled:
-
+**Via ADB:**
 ```bash
 adb install build/app/outputs/flutter-apk/app-release.apk
 ```
 
-The app will appear in the phone's app drawer immediately.
-
-To replace an existing installation:
-```bash
-adb install -r build/app/outputs/flutter-apk/app-release.apk
-```
-
-### Method 2 — Transfer the File Manually
-
-1. Copy `app-release.apk` to your phone via:
-   - **USB file transfer** (drag and drop in Windows Explorer / Finder)
-   - **Google Drive / WhatsApp / Telegram** — share the file to yourself
-   - **Email attachment**
-
-2. On your Android phone, open the APK file using the **Files** app (or any file manager).
-
-3. If prompted with _"Install from unknown sources"_:
-   - Go to **Settings → Apps → Special App Access → Install Unknown Apps**
-   - Find your file manager or browser and toggle **Allow from this source**.
-
-4. Tap **Install** and wait for it to complete.
-
-5. The app will appear in your launcher. Tap **Kids Quiz Game** to start playing.
-
-### Uninstalling
-
-To remove the app via ADB:
-```bash
-adb uninstall com.example.kids_quiz_game
-```
-
-Or simply uninstall it like any other app from your phone's Settings → Apps.
+**Manually:** Transfer the APK to your phone via USB / Google Drive / WhatsApp, open it with your file manager, and tap **Install**. You may need to enable *Install from unknown sources* in Settings → Apps → Special App Access.
 
 ---
 
 ## 🎨 Customisation Guide
 
-### Add a New Category
+### Add a New Quiz Category
 
-1. Add a new `Category` entry in `lib/data/quiz_data.dart`:
-   ```dart
-   Category(
-     name: 'Numbers',
-     icon: '🔢',
-     questions: [
-       Question(
-         imageName: 'one',
-         correctAnswer: 'One',
-         options: ['One', 'Two', 'Three', 'Four'],
-       ),
-       // Add at least 5 questions (10 recommended)
-     ],
-   ),
-   ```
+1. Add a `Category` entry in `lib/data/quiz_data.dart` with `questions` and no `gameRoute`.
+2. Create `assets/images/<category>/` and add 10 PNG images.
+3. Declare the folder in `pubspec.yaml`.
 
-2. Create the asset folder and add images:
-   ```
-   assets/images/numbers/one.png
-   assets/images/numbers/two.png
-   ...
-   ```
+### Add a New Mini-Game
 
-3. Declare it in `pubspec.yaml`:
-   ```yaml
-   - assets/images/numbers/
-   ```
+1. Create your game screen in `lib/screens/`.
+2. Register a named route in `main.dart`.
+3. Add a `Category` entry in `quiz_data.dart` with `gameRoute` pointing to that route (no `questions` needed).
 
-4. Update `categories_screen.dart` to add a new row for the 7th card (the screen currently shows exactly 6 in a 2×3 grid).
-
-### Change Colour Themes
-
-Each screen has its own gradient defined at the top of its `build()` method:
-
-| Screen | Current Colours |
-|---|---|
-| Splash | `0xFFFF6B6B` → `0xFFFFE66D` (red/yellow) |
-| Home | `0xFF667EEA` → `0xFF764BA2` (purple) |
-| Settings | `0xFF11998E` → `0xFF38EF7D` (teal/green) |
-| Categories | `0xFFFF6B6B` → `0xFFFFE66D` (red/yellow) |
-| Quiz | `0xFF4FACFE` → `0xFF00F2FE` (blue) |
-| Results | Dynamic (green/purple/red based on score) |
+The categories screen automatically places it in the **Mini Games** row.
 
 ### Change the Number of Questions Per Session
 
 In `categories_screen.dart`, change the `.take(5)` call:
 ```dart
-final selectedQuestions = shuffledQuestions.take(10).toList(); // 10 questions
+'questions': shuffled.take(10).toList(), // 10 questions per session
 ```
 
-### Change the Auto-Advance Delay
+### Change Screen Colour Themes
 
-In `quiz_screen.dart`, find the delay after an answer is selected:
-```dart
-Future.delayed(const Duration(milliseconds: 2000), () {
-```
-Change `2000` to any value in milliseconds (e.g. `3000` for 3 seconds).
+| Screen | Current Colours |
+|---|---|
+| Splash / Categories | `#FF6B6B` → `#FFE66D` (red/yellow) |
+| Home | `#667EEA` → `#764BA2` (purple) |
+| Settings | `#11998E` → `#38EF7D` (teal/green) |
+| Quiz | `#4FACFE` → `#00F2FE` (blue) |
+| Spot the Difference | `#FF9A9E` → `#A18CD1` (pink/purple) |
+| Alphabet | `#43E97B` → `#38F9D7` (green/teal) |
+| Numbers | `#4FACFE` → `#F09EBB` (blue/pink) |
 
 ---
 
 ## 📄 License
 
-This project is open source and free to use, modify, and distribute for educational and personal purposes. Just give credits to our github profiles.
-
----
-
+This project is open source and free to use, modify, and distribute for educational and personal purposes. Credit to the authors' GitHub profiles is appreciated.
