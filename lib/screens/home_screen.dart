@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+            colors: [Color(0xFF4776E6), Color(0xFF8E54E9), Color(0xFFFF6B6B)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -60,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     );
                   },
                   child: Container(
-                    width: 180,
-                    height: 180,
+                    width: 220,
+                    height: 220,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                     child: const Center(
-                      child: Text('🎮', style: TextStyle(fontSize: 100)),
+                      child: Text('🎮', style: TextStyle(fontSize: 130)),
                     ),
                   ),
                 ),
@@ -82,14 +82,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const Text(
                   'Kids Quiz Game',
                   style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 54,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     shadows: [
                       Shadow(
                           color: Colors.black26,
-                          offset: Offset(2, 2),
-                          blurRadius: 4),
+                          offset: Offset(3, 3),
+                          blurRadius: 6),
                     ],
                   ),
                 ),
@@ -98,8 +98,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   'Learn About Fruits, Vegetables,\nVehicles & More!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 26,
+                    color: Colors.white.withOpacity(0.95),
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: 60),
@@ -162,12 +163,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Colors.white, size: 28),
-            const SizedBox(width: 10),
+            Icon(icon, color: Colors.white, size: 38),
+            const SizedBox(width: 12),
             Text(
               text,
               style: const TextStyle(
-                fontSize: 22,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

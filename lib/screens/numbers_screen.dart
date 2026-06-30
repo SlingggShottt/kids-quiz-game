@@ -124,7 +124,7 @@ class _NumbersScreenState extends State<NumbersScreen> {
                   Text(
                     'How many $emoji do you see?',
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -157,7 +157,7 @@ class _NumbersScreenState extends State<NumbersScreen> {
                                 count,
                                 (_) => Text(emoji,
                                     style:
-                                        const TextStyle(fontSize: 34)),
+                                        const TextStyle(fontSize: 52)),
                               ),
                             ),
                           ),
@@ -168,7 +168,7 @@ class _NumbersScreenState extends State<NumbersScreen> {
                   const SizedBox(height: 10),
                   // Fixed-height button row — never overflows
                   SizedBox(
-                    height: 64,
+                    height: 90,
                     child: Padding(
                       padding:
                           const EdgeInsets.symmetric(horizontal: 16),
@@ -214,17 +214,17 @@ class _NumbersScreenState extends State<NumbersScreen> {
                                         const Icon(
                                             Icons.check_circle,
                                             color: Colors.white,
-                                            size: 14),
+                                            size: 24),
                                       if (_answered &&
                                           isSelected &&
                                           !isCorrect)
                                         const Icon(Icons.cancel,
                                             color: Colors.white,
-                                            size: 14),
+                                            size: 24),
                                       Text(
                                         '$option',
                                         style: const TextStyle(
-                                          fontSize: 26,
+                                          fontSize: 42,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -270,18 +270,19 @@ class _NumbersScreenState extends State<NumbersScreen> {
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: (_currentIndex + 1) / _rounds.length,
-              minHeight: 8,
+              minHeight: 12,
               backgroundColor: Colors.white.withOpacity(0.3),
               valueColor:
                   const AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             'Round ${_currentIndex + 1} of ${_rounds.length}',
             style: TextStyle(
               color: Colors.white.withOpacity(0.9),
-              fontSize: 12,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -314,7 +315,7 @@ class _NumbersScreenState extends State<NumbersScreen> {
               'Numbers Game',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -330,7 +331,7 @@ class _NumbersScreenState extends State<NumbersScreen> {
             child: Text(
               '$_score/${_rounds.length}',
               style: const TextStyle(
-                fontSize: 15,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF4FACFE),
               ),

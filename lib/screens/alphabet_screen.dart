@@ -40,6 +40,13 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
     ('Z', '🦓', 'Zebra'),
   ];
 
+  static const _optionColors = [
+    Color(0xFFFF6B6B),
+    Color(0xFF38EF7D),
+    Color(0xFF667EEA),
+    Color(0xFFFFE66D),
+  ];
+
   final _random = Random();
   late List<(String, String, String)> _questions;
   int _currentIndex = 0;
@@ -187,18 +194,19 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: (_currentIndex + 1) / _questions.length,
-              minHeight: 8,
+              minHeight: 12,
               backgroundColor: Colors.white.withOpacity(0.3),
               valueColor:
                   const AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             'Question ${_currentIndex + 1} of ${_questions.length}',
             style: TextStyle(
               color: Colors.white.withOpacity(0.9),
-              fontSize: 12,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],
@@ -221,25 +229,26 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
           // Emoji scales with available height
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(emoji, style: const TextStyle(fontSize: 64)),
+            child: Text(emoji, style: const TextStyle(fontSize: 90)),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8),
           Text(
             word,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Which letter does "$word" start with?',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
                 color: Colors.white.withOpacity(0.9),
               ),
             ),
@@ -256,9 +265,9 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
         Expanded(
           child: Row(
             children: [
-              _optionBtn(_options[0], correctLetter),
+              _optionBtn(_options[0], correctLetter, 0),
               const SizedBox(width: 10),
-              _optionBtn(_options[1], correctLetter),
+              _optionBtn(_options[1], correctLetter, 1),
             ],
           ),
         ),
@@ -266,9 +275,9 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
         Expanded(
           child: Row(
             children: [
-              _optionBtn(_options[2], correctLetter),
+              _optionBtn(_options[2], correctLetter, 2),
               const SizedBox(width: 10),
-              _optionBtn(_options[3], correctLetter),
+              _optionBtn(_options[3], correctLetter, 3),
             ],
           ),
         ),
@@ -276,14 +285,14 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
     );
   }
 
-  Widget _optionBtn(String option, String correctLetter) {
+  Widget _optionBtn(String option, String correctLetter, int colorIndex) {
     final isCorrect = option == correctLetter;
     final isSelected = _selectedOption == option;
 
-    Color bgColor = Colors.white.withOpacity(0.3);
+    Color bgColor = _optionColors[colorIndex];
     if (_answered) {
-      if (isCorrect) bgColor = Colors.green.withOpacity(0.85);
-      else if (isSelected) bgColor = Colors.red.withOpacity(0.75);
+      if (isCorrect) bgColor = Colors.green.withOpacity(0.9);
+      else if (isSelected) bgColor = Colors.red.withOpacity(0.85);
     }
 
     return Expanded(
@@ -303,15 +312,15 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
               children: [
                 if (_answered && isCorrect)
                   const Icon(Icons.check_circle,
-                      color: Colors.white, size: 20),
+                      color: Colors.white, size: 32),
                 if (_answered && isSelected && !isCorrect)
                   const Icon(Icons.cancel,
-                      color: Colors.white, size: 20),
+                      color: Colors.white, size: 32),
                 if (_answered) const SizedBox(width: 6),
                 Text(
                   option,
                   style: const TextStyle(
-                    fontSize: 30,
+                    fontSize: 52,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -349,7 +358,7 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
               'Alphabet Game',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -365,7 +374,7 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
             child: Text(
               '$_score/${_questions.length}',
               style: const TextStyle(
-                fontSize: 15,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF43E97B),
               ),

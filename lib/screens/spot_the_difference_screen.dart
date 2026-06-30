@@ -116,18 +116,19 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
                           borderRadius: BorderRadius.circular(8),
                           child: LinearProgressIndicator(
                             value: (_round + 1) / 10,
-                            minHeight: 8,
+                            minHeight: 12,
                             backgroundColor: Colors.white.withOpacity(0.3),
                             valueColor: const AlwaysStoppedAnimation<Color>(
                                 Colors.white),
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 6),
                         Text(
                           'Round ${_round + 1} of 10',
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
-                            fontSize: 13,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -137,7 +138,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
                   const Text(
                     '🔍 Tap the odd one out!',
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 34,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -157,7 +158,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
                               (constraints.maxHeight - 3 * spacing) / 4;
                           final ratio = cellW / cellH;
                           final emojiSz =
-                              (cellW < cellH ? cellW : cellH) * 0.48;
+                              (cellW < cellH ? cellW : cellH) * 0.60;
 
                           return GridView.builder(
                             physics: const NeverScrollableScrollPhysics(),
@@ -203,7 +204,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
                                       emoji,
                                       style: TextStyle(
                                         fontSize:
-                                            emojiSz.clamp(14.0, 40.0),
+                                            emojiSz.clamp(20.0, 56.0),
                                       ),
                                     ),
                                   ),
@@ -264,7 +265,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
               'Spot the Difference',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -272,7 +273,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
           ),
           Container(
             padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(14),
@@ -280,7 +281,7 @@ class _SpotTheDifferenceScreenState extends State<SpotTheDifferenceScreen> {
             child: Text(
               '$_score/10',
               style: const TextStyle(
-                fontSize: 15,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFFFF9A9E),
               ),

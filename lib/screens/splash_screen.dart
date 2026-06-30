@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFFF6B6B), Color(0xFFFFE66D)],
+            colors: [Color(0xFFFF6B6B), Color(0xFFFF9A3C), Color(0xFFFFE66D)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -103,8 +103,8 @@ class _SplashScreenState extends State<SplashScreen>
                   );
                 },
                 child: Container(
-                  width: 150,
-                  height: 150,
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -119,7 +119,7 @@ class _SplashScreenState extends State<SplashScreen>
                   child: const Center(
                     child: Text(
                       '📚',
-                      style: TextStyle(fontSize: 80),
+                      style: TextStyle(fontSize: 110),
                     ),
                   ),
                 ),
@@ -134,14 +134,14 @@ class _SplashScreenState extends State<SplashScreen>
                       const Text(
                         'Kids Quiz',
                         style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 60,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           shadows: [
                             Shadow(
                               color: Colors.black26,
-                              offset: Offset(2, 2),
-                              blurRadius: 4,
+                              offset: Offset(3, 3),
+                              blurRadius: 6,
                             ),
                           ],
                         ),
@@ -150,9 +150,10 @@ class _SplashScreenState extends State<SplashScreen>
                       Text(
                         'Learn & Play!',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 30,
                           color: Colors.white.withOpacity(0.9),
                           fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],

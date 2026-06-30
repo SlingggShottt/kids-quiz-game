@@ -155,8 +155,8 @@ class _ResultsScreenState extends State<ResultsScreen>
     return ScaleTransition(
       scale: _scaleAnimation,
       child: Container(
-        width: 130,
-        height: 130,
+        width: 170,
+        height: 170,
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
@@ -169,7 +169,7 @@ class _ResultsScreenState extends State<ResultsScreen>
           ],
         ),
         child: Center(
-          child: Text(_emoji, style: const TextStyle(fontSize: 70)),
+          child: Text(_emoji, style: const TextStyle(fontSize: 96)),
         ),
       ),
     );
@@ -181,7 +181,7 @@ class _ResultsScreenState extends State<ResultsScreen>
       child: Text(
         _message,
         style: const TextStyle(
-          fontSize: 28,
+          fontSize: 42,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
@@ -202,7 +202,8 @@ class _ResultsScreenState extends State<ResultsScreen>
             Text(
               _category,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
                 color: Colors.white.withOpacity(0.9),
               ),
             ),
@@ -226,14 +227,14 @@ class _ResultsScreenState extends State<ResultsScreen>
                 Text(
                   '$_score / $_total',
                   style: const TextStyle(
-                    fontSize: 48,
+                    fontSize: 64,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF4FACFE),
                   ),
                 ),
                 Text(
                   'Correct Answers',
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 24, color: Colors.grey[600]),
                 ),
               ],
             ),
@@ -261,7 +262,7 @@ class _ResultsScreenState extends State<ResultsScreen>
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Icon(
               filled ? Icons.star : Icons.star_border,
-              size: 48,
+              size: 64,
               color: filled
                   ? const Color(0xFFFFE66D)
                   : Colors.white.withOpacity(0.5),
@@ -352,14 +353,13 @@ class _ResultsScreenState extends State<ResultsScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: Colors.white, size: 22),
-            const SizedBox(width: 8),
-            // Flexible lets the text shrink if needed instead of overflowing
+            Icon(icon, color: Colors.white, size: 32),
+            const SizedBox(width: 10),
             Flexible(
               child: Text(
                 text,
                 style: const TextStyle(
-                  fontSize: 17,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),

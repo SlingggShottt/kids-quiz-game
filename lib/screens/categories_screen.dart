@@ -90,7 +90,7 @@ class CategoriesScreen extends StatelessWidget {
       builder: (ctx, constraints) {
         const hPad = 12.0;
         const gap = 8.0;
-        const labelH = 18.0;
+        const labelH = 28.0;
         // vertical budget:
         // vPad(6) + label + gap + row + gap + row + gap + row + gap +
         //           label + gap + gameRow + vPad(6)
@@ -100,8 +100,8 @@ class CategoriesScreen extends StatelessWidget {
             ((constraints.maxHeight - fixedV) / 4).clamp(48.0, 160.0);
         final quizW = (constraints.maxWidth - 2 * hPad - gap) / 2;
         final gameW = (constraints.maxWidth - 2 * hPad - 2 * gap) / 3;
-        final emojiSz = (cardH * 0.38).clamp(20.0, 52.0);
-        final fontSz = (cardH * 0.12).clamp(9.0, 15.0);
+        final emojiSz = (cardH * 0.46).clamp(28.0, 64.0);
+        final fontSz = (cardH * 0.18).clamp(13.0, 22.0);
 
         Widget buildCard(Category cat, Color color, double w,
             {bool isGame = false}) {
@@ -160,7 +160,7 @@ class CategoriesScreen extends StatelessWidget {
                         child: const Text(
                           'GAME',
                           style: TextStyle(
-                            fontSize: 7,
+                            fontSize: 11,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -191,7 +191,7 @@ class CategoriesScreen extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 shadows: [

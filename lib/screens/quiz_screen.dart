@@ -191,7 +191,7 @@ class _QuizScreenState extends State<QuizScreen> {
               'Quiz Time!',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -205,7 +205,7 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Text(
               '$_score/${_questions!.length}',
               style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF4FACFE)),
             ),
@@ -223,12 +223,12 @@ class _QuizScreenState extends State<QuizScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_category!.icon, style: const TextStyle(fontSize: 18)),
-              const SizedBox(width: 6),
+              Text(_category!.icon, style: const TextStyle(fontSize: 28)),
+              const SizedBox(width: 8),
               Text(
                 _category!.name,
                 style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
@@ -239,16 +239,16 @@ class _QuizScreenState extends State<QuizScreen> {
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: (_currentIndex + 1) / _questions!.length,
-              minHeight: 8,
+              minHeight: 12,
               backgroundColor: Colors.white.withOpacity(0.3),
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             'Question ${_currentIndex + 1} of ${_questions!.length}',
             style: TextStyle(
-                fontSize: 11, color: Colors.white.withOpacity(0.9)),
+                fontSize: 18, color: Colors.white.withOpacity(0.9)),
           ),
         ],
       ),
@@ -260,8 +260,8 @@ class _QuizScreenState extends State<QuizScreen> {
       builder: (context, constraints) {
         final availableHeight = constraints.maxHeight;
         final availableWidth = constraints.maxWidth;
-        final imageSize = (availableHeight * 0.32).clamp(90.0, 200.0);
-        final fontSize = (availableWidth * 0.038).clamp(13.0, 18.0);
+        final imageSize = (availableHeight * 0.32).clamp(100.0, 220.0);
+        final fontSize = (availableWidth * 0.06).clamp(20.0, 30.0);
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -282,7 +282,7 @@ class _QuizScreenState extends State<QuizScreen> {
               Text(
                 'What is this?',
                 style: TextStyle(
-                  fontSize: (availableWidth * 0.055).clamp(16.0, 24.0),
+                  fontSize: (availableWidth * 0.09).clamp(28.0, 42.0),
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -299,7 +299,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Widget _buildAnswerGrid(
       Question question, double fontSize, double availableHeight) {
-    final buttonHeight = (availableHeight * 0.17).clamp(44.0, 68.0);
+    final buttonHeight = (availableHeight * 0.22).clamp(72.0, 110.0);
     const gap = 8.0;
 
     return SizedBox(
@@ -360,9 +360,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 children: [
                   if (_showResult && isCorrect)
                     const Icon(Icons.check_circle,
-                        color: Colors.white, size: 18),
+                        color: Colors.white, size: 30),
                   if (_showResult && isSelected && !isCorrect)
-                    const Icon(Icons.cancel, color: Colors.white, size: 18),
+                    const Icon(Icons.cancel, color: Colors.white, size: 30),
                   if (_showResult) const SizedBox(width: 4),
                   Flexible(
                     child: Text(
