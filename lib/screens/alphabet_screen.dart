@@ -226,31 +226,18 @@ class _AlphabetScreenState extends State<AlphabetScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Emoji scales with available height
           FittedBox(
             fit: BoxFit.scaleDown,
-            child: Text(emoji, style: const TextStyle(fontSize: 90)),
+            child: Text(emoji, style: const TextStyle(fontSize: 120)),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
           Text(
-            word,
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Which letter does "$word" start with?',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                color: Colors.white.withOpacity(0.9),
-              ),
+            'What letter does it start with?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.95),
             ),
           ),
         ],
