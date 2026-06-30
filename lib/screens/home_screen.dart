@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 220,
+        width: 300,
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 30),
         decoration: BoxDecoration(
           color: color,
